@@ -1,6 +1,8 @@
 const express = require('express')
 const mongoose = require('mongoose')
 
+const User = require('./models/User')
+
 const app = express()
 
 app.use(
@@ -30,4 +32,31 @@ mongoose
     app.listen(port)
   })
   .catch(error => console.log('Erro: ', error))
+
+app.post('/user', async (request, response) => {
+  const { name, email, password } = request.body
+
+  const user = {
+    name,
+    email, 
+    password
+  }
+  
+  try {
+    await User.create(user)
+    
+    response
+      .status(201)
+      .json({ 
+        message: 'User criado com sucesso',
+        user: user
+      })
+
+  }
+  catch (error) {
+    response
+      .status(500)
+      .json({ error: error })
+  }
+})
 
