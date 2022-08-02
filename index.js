@@ -36,11 +36,7 @@ mongoose
 app.post('/user', async (request, response) => {
   const { name, email, password } = request.body
 
-  const user = {
-    name,
-    email, 
-    password
-  }
+  const user = { name, email, password }
   
   try {
     await User.create(user)
@@ -83,6 +79,27 @@ app.get('/user/:id', async (request, response) => {
     response
       .status(200)
       .json(user)
+  }
+  catch (error) {
+    response
+      .status(500)
+      .json({ error: error })
+  }
+})
+
+app.patch('/user/:id', async (request, response) => {
+  const id = request.params.id
+
+  const { name, email, password } = request.body
+
+  const user = { name, email, password }
+
+  try {
+    await User.updateOne({ _id: id }, user)
+  
+    response
+      .status(200)
+      .json({ 'message': 'usuario atualizado com sucesso' })
   }
   catch (error) {
     response
