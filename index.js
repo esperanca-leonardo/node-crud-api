@@ -51,7 +51,6 @@ app.post('/user', async (request, response) => {
         message: 'User criado com sucesso',
         user: user
       })
-
   }
   catch (error) {
     response
@@ -60,3 +59,17 @@ app.post('/user', async (request, response) => {
   }
 })
 
+app.get('/user', async (request, response) => {
+  try {
+    const users = await User.find()  
+  
+    response
+      .status(200)
+      .json(users)
+  }
+  catch (error) {
+    response
+      .status(500)
+      .json({ error: error })
+  }
+})
