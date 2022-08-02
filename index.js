@@ -107,3 +107,20 @@ app.patch('/user/:id', async (request, response) => {
       .json({ error: error })
   }
 })
+
+app.delete('/user/:id', async (request, response) => {
+  const id = request.params.id
+  
+  try {
+    await User.deleteOne({ _id: id })
+  
+    response
+      .status(200)
+      .json({ message: 'usuario deletado com sucesso' })
+  }
+  catch (error) { 
+    response
+      .status(500)
+      .json({ error: error })
+  }
+})
