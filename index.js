@@ -73,3 +73,20 @@ app.get('/user', async (request, response) => {
       .json({ error: error })
   }
 })
+
+app.get('/user/:id', async (request, response) => {
+  const id = request.params.id
+  
+  try {
+    const user = await User.findOne({ _id: id })
+
+    response
+      .status(200)
+      .json(user)
+  }
+  catch (error) {
+    response
+      .status(500)
+      .json({ error: error })
+  }
+})
