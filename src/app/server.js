@@ -1,3 +1,4 @@
+const mongoose = require('../database/index');
 const express = require('express');
 const userRoute = require('./routes/userRoute');
 
