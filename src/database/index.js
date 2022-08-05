@@ -7,7 +7,7 @@ const connectionString = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@node-api.hzzdf
 
 mongoose
   .connect(connectionString)
-  .then(() => console.log('Conectado ao BD com sucesso'))
+  .then(() => console.log('BD connected successfully'))
   .catch(error => console.log(`Erro: ${error}`));
 
 module.exports = mongoose;
